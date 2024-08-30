@@ -1,0 +1,52 @@
+<div class="container">
+  <%= link_to lists_path, :class => "btn btn-dark rounded" do %>
+    <i class="fa-solid fa-arrow-left"></i>
+  <% end %>
+  <div class="container bg-light m-2 p-2">
+    <h1> <%= @list.name %></h1>
+  <div>
+  <div class="container">
+    <div class="container">
+      <div class="flex-grow-1">
+        <h2>Bookmarks</h2>
+      </div>
+      <div class="container" id="bookmarks">
+          <% @movies.each do |movie| %>
+            <div class="container">
+              <img src='https://image.tmdb.org/t/p/w500<%=movie.poster_url%>'></img>
+              <p>
+                <strong><%= movie.title %></strong>
+                <%= movie.rating %>
+                <i class="fa-solid fa-star"></i>
+              </p>
+              <p>
+                <%= movie.overview %>
+              </p>
+              <% bookmarks = @list.bookmarks.where(movie_id: movie.id) %>
+              <% if bookmarks.any? %>
+                <% bookmarks.each do |bookmark| %>
+                  <p>
+                    <strong>
+                      <%= bookmark.comment %>
+                    </strong>
+                  </p>
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
+      </div>
+      <hr>
+      <div class="container" id="new_bookmark">
+        <h1>New bookmark</h1>
+        <%= simple_form_for [@list, @bookmark] do |f| %>
+          <%= f.error_notification %>
+          <%= f.input :comment %>
+          <%= f.association :list %>
+          <%= f.association :movie %>
+        <%= f.submit class: 'btn btn-dark' %>
+        <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
