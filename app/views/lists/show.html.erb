@@ -2,56 +2,62 @@
   <%= link_to lists_path, :class => "btn btn-dark rounded" do %>
     <i class="fa-solid fa-arrow-left"></i>
   <% end %>
-  <div class="container bg-light m-2 p-2">
+  <div class="container bg-light">
     <h1> <%= @list.name %></h1>
   <div>
   <div class="container">
-    <div class="container">
-      <div class="flex-grow-1">
-        <h2>Bookmarks</h2>
-      </div>
-      <div class="cards-movies" id="bookmarks">
-          <% @movies.each do |movie| %>
-            <div class="card-movie">
-              <img src='https://image.tmdb.org/t/p/w500<%=movie.poster_url%>'></img>
-              <div class="card-movie-info">
-                <h6>
-                  <strong><%= movie.title %></strong>
-                  <%= movie.rating %>
-                  <i class="fa-solid fa-star"></i>
-                </h6>
-                <p>
-                  <%= movie.overview %>
-                </p>
-              </div>
-              <div class="card-bookmark-comment">
-                <% bookmarks = @list.bookmarks.where(movie_id: movie.id) %>
-                <% if bookmarks.any? %>
-                  <% bookmarks.each do |bookmark| %>
-                    <p>
-                      <i class="fa-solid fa-quote-left"></i>
+    <div class="flex-grow-1"></div>
+    <div class="cards-movies" id="bookmarks">
+        <% @movies.each do |movie| %>
+          <div class="card-movie">
+            <img src='https://image.tmdb.org/t/p/w500<%=movie.poster_url%>'></img>
+            <div class="card-movie-info">
+              <h6>
+                <strong><%= movie.title %></strong> •
+                <%= movie.rating %>
+                <i class="fa-solid fa-star text-info"></i>
+              </h6>
+              <p>
+                <%= movie.overview %>
+              </p>
+            </div>
+            <div class="card-bookmark-comment d-flex flex-grow-1 justify-content-between">
+              <% bookmarks = @list.bookmarks.where(movie_id: movie.id) %>
+              <% if bookmarks.any? %>
+                <% bookmarks.each do |bookmark| %>
+                  <h6>
+                    <i class="fa-solid fa-quote-left"></i>
+                    <small>
                       <strong>
                         <%= bookmark.comment %>
                       </strong>
-                    </p>
+                    </small>
+                  </h6>
+                  <%= link_to bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} do %>
+                    <i class="fa-solid fa-square-minus text-dark ms-3"></i>
                   <% end %>
                 <% end %>
-              </div>
+              <% end %>
             </div>
-          <% end %>
-      </div>
-      <hr>
-      <div class="container" id="new_bookmark">
-        <h1>New bookmark</h1>
-        <%= simple_form_for [@list, @bookmark] do |f| %>
-          <%= f.error_notification %>
-          <%= f.input :comment %>
-          <%= f.input :list_id, as: :hidden, input_html: { value: @list.id } %>
-          <%= f.association :movie %>
-        <%= f.submit class: 'btn btn-dark' %>
+          </div>
         <% end %>
-        </div>
+    </div>
+    <hr>
+    <div class="container d-flex">
+      <div class="container">
+        <h3>Reviews</h3>
       </div>
+      <div class="container bg-white m-3 mb-5 py-5 px-4 rounded-3 border border-dark" id="new_bookmark">
+      <h3>Add your review</h3>
+      <%= simple_form_for [@list, @bookmark] do |f| %>
+        <%= f.error_notification %>
+        <%= f.input :comment %>
+        <%= f.input :list_id, as: :hidden, input_html: { value: @list.id } %>
+        <%= f.association :movie %>
+      <%= f.submit class: 'btn btn-dark rounded-3' %>
+      <% end %>
+      </div>
+    </div>
     </div>
   </div>
 </div>

@@ -1,6 +1,7 @@
 .container .cards, .cards-movies {
   flex-grow: 1;
   margin: 16px;
+  margin-bottom: 2em;
 }
 
 .cards {
@@ -12,7 +13,7 @@
 .cards-movies {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 16px;
+  grid-gap: 25px;
 }
 
 
