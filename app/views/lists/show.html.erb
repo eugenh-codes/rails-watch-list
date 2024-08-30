@@ -41,7 +41,7 @@
         <%= simple_form_for [@list, @bookmark] do |f| %>
           <%= f.error_notification %>
           <%= f.input :comment %>
-          <%= f.association :list %>
+          <%= f.input :list_id, as: :hidden, input_html: { value: @list.id } %>
           <%= f.association :movie %>
         <%= f.submit class: 'btn btn-dark' %>
         <% end %>

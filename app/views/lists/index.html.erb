@@ -1,24 +1,27 @@
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://img3.wallspic.com/crops/5/3/8/6/5/156835/156835-wallpapoers_de_cine-cine-teatro-karikaalan-multicines-1920x1080.jpg)">
+  <h1>Movies</h1>
+</div>
 <div class="container">
   <div class="d-flex m-3 p-2">
-      <div class="flex-grow-1">
-        <h1>lists</h1>
-      </div>
-      <div class="m-1">
-        <%= link_to new_list_path, :class => "btn btn-dark" do %>
-          <i class="fa-solid fa-plus"></i> Add
-        <% end %>
-      </div>
+    <div class="flex-grow-1">
+      <h1>My lists</h1>
+    </div>
+    <div class="m-1">
+      <%= link_to new_list_path, :class => "btn btn-dark" do %>
+        <i class="fa-solid fa-plus"></i> Add
+      <% end %>
+    </div>
   </div>
   <div class="container">
-    <ul class="list-inline">
+    <div class="cards">
       <% @lists.each do |list| %>
-        <li class="m-1 p-1">
-          <%= link_to list_path(list), :class => "bg text-decoration-none text-muted" do %>
-            <i class="fa-solid fa-hashtag"></i>&nbsp; <%= list.name %>
-          <% end %>
-        </li>
+        <%= link_to list_path(list), :class => "bg text-decoration-none text-muted" do %>
+          <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3))">
+          <%= list.name %>
+        </div>
+        <% end %>
       <% end %>
-    </ul>
+    </div>
   </div>
   <hr>
 </div>
