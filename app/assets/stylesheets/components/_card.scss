@@ -12,3 +12,39 @@
   font-weight: bolder;
   text-shadow: 0 0 10px rgba(0,0,0,0.7);
 }
+
+.card-movie {
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 2;
+}
+
+.card-movie > img {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.card-movie p {
+  font-size: 1em;
+  opacity: .7;
+  margin: 0;
+}
+
+.card-movie .card-movie-info {
+  padding: 16px;
+  padding-top: 1.5em;
+  align-items: flex-start;
+  position: relative;
+}
+
+.card-movie .card-bookmark-comment {
+  padding: 16px;
+  display: flex;
+  align-items: end;
+  text-align: end;
+  margin-top: auto;
+}

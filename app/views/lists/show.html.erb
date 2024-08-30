@@ -10,28 +10,33 @@
       <div class="flex-grow-1">
         <h2>Bookmarks</h2>
       </div>
-      <div class="container" id="bookmarks">
+      <div class="cards-movies" id="bookmarks">
           <% @movies.each do |movie| %>
-            <div class="container">
+            <div class="card-movie">
               <img src='https://image.tmdb.org/t/p/w500<%=movie.poster_url%>'></img>
-              <p>
-                <strong><%= movie.title %></strong>
-                <%= movie.rating %>
-                <i class="fa-solid fa-star"></i>
-              </p>
-              <p>
-                <%= movie.overview %>
-              </p>
-              <% bookmarks = @list.bookmarks.where(movie_id: movie.id) %>
-              <% if bookmarks.any? %>
-                <% bookmarks.each do |bookmark| %>
-                  <p>
-                    <strong>
-                      <%= bookmark.comment %>
-                    </strong>
-                  </p>
+              <div class="card-movie-info">
+                <h6>
+                  <strong><%= movie.title %></strong>
+                  <%= movie.rating %>
+                  <i class="fa-solid fa-star"></i>
+                </h6>
+                <p>
+                  <%= movie.overview %>
+                </p>
+              </div>
+              <div class="card-bookmark-comment">
+                <% bookmarks = @list.bookmarks.where(movie_id: movie.id) %>
+                <% if bookmarks.any? %>
+                  <% bookmarks.each do |bookmark| %>
+                    <p>
+                      <i class="fa-solid fa-quote-left"></i>
+                      <strong>
+                        <%= bookmark.comment %>
+                      </strong>
+                    </p>
+                  <% end %>
                 <% end %>
-              <% end %>
+              </div>
             </div>
           <% end %>
       </div>
